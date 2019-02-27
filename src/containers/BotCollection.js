@@ -21,7 +21,7 @@ class BotCollection extends React.Component {
 
   showBots = () => {
     if (this.state.specs) {
-      return <BotSpecs bot={this.state.specs} toggleSpecs={this.toggleSpecs} />
+      return <BotSpecs bot={this.state.specs} toggleSpecs={this.toggleSpecs} toggleEnlist={this.props.toggleEnlist} />
     } else {
       return this.props.bots.map(bot => <BotCard key={bot.id} bot={bot} handleClick={this.toggleSpecs} />)
 
