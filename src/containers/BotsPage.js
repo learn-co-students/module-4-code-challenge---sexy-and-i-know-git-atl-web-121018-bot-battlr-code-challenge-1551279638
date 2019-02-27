@@ -4,7 +4,8 @@ import YourBotArmy from './YourBotArmy'
 
 class BotsPage extends React.Component {
   state = {
-    bots: []
+    bots: [],
+    enlistedBots: []
   }
 
   componentDidMount() {
@@ -13,10 +14,15 @@ class BotsPage extends React.Component {
     })
   }
 
+  enlistBot = (bot) => {
+    this.setState({enlistedBots: [...this.state.enlistedBots, bot]})
+  }
+
   render() {
     return (
       <div>
-        <BotCollection bots={this.state.bots} />
+        <BotCollection bots={this.state.bots} enlistBot={this.enlistBot} />
+        <YourBotArmy bots={this.state.enlistedBots} />
       </div>
     );
   }
