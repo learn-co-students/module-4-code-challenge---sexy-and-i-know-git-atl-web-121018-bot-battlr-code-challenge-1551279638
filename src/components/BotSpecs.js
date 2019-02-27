@@ -1,6 +1,18 @@
 import React from "react";
 
 const BotSpecs = props => {
+
+    const handleBackBtn = () => {
+        props.handleBackBtn
+    }
+
+    const handleEnlistBtn = () => {
+        // console.log(props.bot)
+        props.handleEnlistBtn(props.bot)
+    }
+
+
+
   let { bot } = props;
 
   let botType;
@@ -25,7 +37,7 @@ const BotSpecs = props => {
         <div className="row">
           <div className="four wide column">
             <img
-              alt="oh no!"
+              alt={bot.name}
               className="ui medium circular image bordered"
               src={bot.avatar_url}
             />
@@ -60,20 +72,12 @@ const BotSpecs = props => {
             </div>
             <button
               className="ui button fluid"
-              onClick={() =>
-                console.log('connect this to a function that shows all bots')
-              }
-            >
+              onClick={handleBackBtn}>
               Go Back
             </button>
             <button
               className="ui button fluid"
-              onClick={() =>
-                console.log(
-                  "connect this to a function that adds this bot to your bot army list"
-                )
-              }
-            >
+              onClick={handleEnlistBtn}>
               Enlist
             </button>
           </div>
