@@ -1,7 +1,8 @@
 import React from "react";
 import BotCollection from "./BotCollection";
 import YourBotArmy from "./YourBotArmy";
-import BotCard from "../components/BotCard"
+// import BotCard from "../components/BotCard"
+import BotSpecs from "../components/BotSpecs"
 
 class BotsPage extends React.Component {
   //start here with your code for step one
@@ -12,16 +13,23 @@ class BotsPage extends React.Component {
 
     this.state = {
       botList: [],
-      enlisted: []
+      enlisted: [],
+      showBot: null
     }
   }
 
-
-  makeCards = (bots) => {
-    return bots.map(bot => {
-      return <BotCard bot={bot} enlist={this.enlist}/>
+  displaySpecs = (bot) => {
+    // console.log(bot)
+    this.setState({
+      showBot: bot
     })
   }
+
+  // makeCards = (bots) => {
+  //   return bots.map(bot => {
+  //     return <BotCard bot={bot} enlist={this.enlist}/>
+  //   })
+  // }
 
 
   enlist = (bot) => {
@@ -55,7 +63,9 @@ class BotsPage extends React.Component {
     return (
       <div>
         <YourBotArmy enlisted={this.state.enlisted} enlist={this.unenlist}/>
-        <BotCollection botList={this.state.botList} enlist={this.enlist}/>
+        {this.state.showBot ? <BotSpecs bot={this.state.showBot} enlist={this.enlist} displaySpecs={this.displaySpecs}/>
+        :
+        <BotCollection botList={this.state.botList} enlist={this.enlist} displaySpecs={this.displaySpecs}/>}
         {/* put your components here */}
       </div>
     );
