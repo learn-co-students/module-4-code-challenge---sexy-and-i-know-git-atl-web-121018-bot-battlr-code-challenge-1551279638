@@ -1,14 +1,31 @@
 import React from "react";
 import BotCard from "../components/BotCard";
+import BotSpecs from "../components/BotSpecs"
 
 class BotCollection extends React.Component {
+  state = {
+    specs: null
+  }
 
-  toggleEnlist = (bot) => {
-    this.props.toggleEnlist(bot, true)
+  toggleSpecs = (bot) => {
+    let newSpecs
+
+    if (this.state.specs) {
+      newSpecs = null
+    } else {
+      newSpecs = bot
+    }
+
+    this.setState({specs: newSpecs})
   }
 
   showBots = () => {
-    return this.props.bots.map(bot => <BotCard key={bot.id} bot={bot} toggleEnlist={this.toggleEnlist} />)
+    if (this.state.specs) {
+      return <BotSpecs bot={this.state.specs} />
+    } else {
+      return this.props.bots.map(bot => <BotCard key={bot.id} bot={bot} handleClick={this.toggleSpecs} />)
+
+    }
   }
 
   render(){
