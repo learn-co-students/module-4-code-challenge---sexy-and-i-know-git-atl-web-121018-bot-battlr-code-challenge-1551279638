@@ -8,12 +8,11 @@ class BotCollection extends React.Component {
   	return (
   	  <div className="ui four column grid">
     		<div className="row">
-				Collection of all bots
     		{botList}
     		</div>
   	  </div>
   	);
-  }x
+  }
 };
 
 export default BotCollection;

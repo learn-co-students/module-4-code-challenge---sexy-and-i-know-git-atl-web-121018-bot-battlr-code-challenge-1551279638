@@ -44,19 +44,11 @@ class BotsPage extends React.Component {
   } 
 
   addBot = (bot) => {
-    if (this.state.botArmy.includes(bot)) {
-      const newBotArmy = this.state.botArmy.filter(botObj => botObj.id !== bot.id)
-      this.setState({
-        botArmy: newBotArmy
-      })
-    } else {
-      const newBotArmy = [...this.state.botArmy, bot]
-      this.setState({
-        botArmy: newBotArmy,
-        renderMe: true,
-        selectedBot: bot
-      })
-    }
+    const newBotArmy = [...this.state.botArmy, bot]
+    this.setState({
+      botArmy: newBotArmy,
+      renderMe: true    
+    })
   }
 
   showAll = () => {
