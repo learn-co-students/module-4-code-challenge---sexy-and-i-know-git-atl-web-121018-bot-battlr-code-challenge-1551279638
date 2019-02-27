@@ -14,15 +14,24 @@ class BotsPage extends React.Component {
     })
   }
 
-  enlistBot = (bot) => {
-    this.setState({enlistedBots: [...this.state.enlistedBots, bot]})
+  toggleEnlist = (bot) => {
+    let newEnlistedBots
+
+    if (this.state.enlistedBots.includes(bot)) {
+      newEnlistedBots = [...this.state.enlistedBots]
+      newEnlistedBots.splice(newEnlistedBots.indexOf(bot), 1)
+    } else {
+      newEnlistedBots = [...this.state.enlistedBots, bot]
+    }
+    console.log(newEnlistedBots);
+    this.setState({enlistedBots: newEnlistedBots})
   }
 
   render() {
     return (
       <div>
-        <BotCollection bots={this.state.bots} enlistBot={this.enlistBot} />
-        <YourBotArmy bots={this.state.enlistedBots} />
+        <BotCollection bots={this.state.bots} toggleEnlist={this.toggleEnlist} />
+        <YourBotArmy bots={this.state.enlistedBots} toggleEnlist={this.toggleEnlist} />
       </div>
     );
   }
