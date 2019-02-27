@@ -20,8 +20,7 @@ const BotCard = props => {
   } 
 
   const handleClick = () => {
-    // props.handleBot(props.bot)
-    props.showBot(props.bot)
+    props.handleBot(props.bot)
   }
 
   return (

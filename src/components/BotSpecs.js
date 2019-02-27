@@ -17,6 +17,10 @@ const BotSpecs = props => {
       break;
     default:
       botType = <div />;
+  } 
+
+  const handleClick = () => {
+    props.addBot(props.bot)
   }
 
   return (
@@ -66,7 +70,7 @@ const BotSpecs = props => {
             </button>
             <button
               className="ui button fluid"
-              onClick={() => props.handleBot(bot)}
+              onClick={handleClick}
             >
               Enlist
             </button>

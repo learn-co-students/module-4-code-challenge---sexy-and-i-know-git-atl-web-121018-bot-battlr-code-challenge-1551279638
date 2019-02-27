@@ -1,6 +1,8 @@
 import React from "react";
 import BotCollection from "./BotCollection";
 import YourBotArmy from "./YourBotArmy";
+import BotSpecs from "../components/BotSpecs";
+
 
 const API = 'https://bot-battler-api.herokuapp.com/api/v1/bots'
 
@@ -11,7 +13,9 @@ class BotsPage extends React.Component {
 
     this.state = {
       bots: [],
-      botArmy: []
+      botArmy: [],
+      renderMe: true,
+      selectedBot: null
     }
   }
 
@@ -32,23 +36,44 @@ class BotsPage extends React.Component {
         botArmy: newBotArmy
       })
     } else {
-      const newBotArmy = [...this.state.botArmy, bot]
-      console.log("newbotarmy", newBotArmy)
+      this.setState({
+        renderMe: false,
+        selectedBot: bot
+      })
+    }
+  } 
+
+  addBot = (bot) => {
+    if (this.state.botArmy.includes(bot)) {
+      const newBotArmy = this.state.botArmy.filter(botObj => botObj.id !== bot.id)
       this.setState({
         botArmy: newBotArmy
+      })
+    } else {
+      const newBotArmy = [...this.state.botArmy, bot]
+      this.setState({
+        botArmy: newBotArmy,
+        renderMe: true,
+        selectedBot: bot
       })
     }
   }
 
+  showAll = () => {
+		this.setState({
+			renderMe: true
+		})
+	}
+
   render() {
+    
     return (
       <div>
         <YourBotArmy botArmy={this.state.botArmy} handleBot={this.handleBot}/> 
-        <BotCollection bots={this.state.bots} handleBot={this.handleBot}/> 
+        {this.state.renderMe === true ? <BotCollection bots={this.state.bots} handleBot={this.handleBot}/> : <BotSpecs bot={this.state.selectedBot} handleBot={this.handleBot} showAll={this.showAll} addBot={this.addBot}/>}
       </div>
     );
   }
-
 }
 
 export default BotsPage;
