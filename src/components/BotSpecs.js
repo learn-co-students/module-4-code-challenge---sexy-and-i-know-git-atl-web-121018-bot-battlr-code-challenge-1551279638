@@ -25,7 +25,7 @@ const BotSpecs = props => {
         <div className="row">
           <div className="four wide column">
             <img
-              alt="oh no!"
+              alt={bot.name}
               className="ui medium circular image bordered"
               src={bot.avatar_url}
             />
