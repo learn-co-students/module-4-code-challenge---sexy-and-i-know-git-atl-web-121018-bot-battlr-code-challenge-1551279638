@@ -1,12 +1,37 @@
 import React from "react";
+import BotCollection from './BotCollection'
+import YourBotArmy from './YourBotArmy'
 
 class BotsPage extends React.Component {
-  //start here with your code for step one
+  state = {
+    bots: [],
+    enlistedBots: []
+  }
+
+  componentDidMount() {
+    fetch('https://bot-battler-api.herokuapp.com/api/v1/bots').then(res => res.json()).then(bots => {
+      this.setState({bots: bots})
+    })
+  }
+
+  toggleEnlist = (bot, fromCollection=false) => {
+    let newEnlistedBots
+
+    if (this.state.enlistedBots.includes(bot)) {
+      if (fromCollection) return
+      newEnlistedBots = [...this.state.enlistedBots]
+      newEnlistedBots.splice(newEnlistedBots.indexOf(bot), 1)
+    } else {
+      newEnlistedBots = [...this.state.enlistedBots, bot]
+    }
+    this.setState({enlistedBots: newEnlistedBots})
+  }
 
   render() {
     return (
       <div>
-        {/* put your components here */}
+        <BotCollection bots={this.state.bots} toggleEnlist={this.toggleEnlist} />
+        <YourBotArmy bots={this.state.enlistedBots} toggleEnlist={this.toggleEnlist} />
       </div>
     );
   }
